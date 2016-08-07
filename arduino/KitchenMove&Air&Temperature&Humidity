@@ -5,6 +5,7 @@
 #define lightSensBar 4
 #define releLightBar 5
 #define DHTPIN 6
+#define releAirKitch 7
 #define DHTTYPE DHT22
 
 DHT dht(DHTPIN, DHT22);
@@ -24,9 +25,8 @@ void setup()
   pinMode(lightSensBar, INPUT);
   pinMode(releLightBar, OUTPUT);
   pinMode(kitchenAirPin, INPUT);
+  pinMode(releAirKitch, OUTPUT);
   dht.begin();
-  //digitalWrite(releLightKitchen, HIGH);
-  //digitalWrite(releLightBar, HIGH);
 }
 
 void loop()
@@ -45,7 +45,17 @@ void loop()
   Serial.println(kitchenTemperature);
   motionKitchen(30);
   motionBar(30);
+  cleanAir(kitchenAirValue);
 }
+
+void cleanAir(int kitchenAirValue) {
+  if (kitchenAirValue > 45) {
+    digitalWrite(releAirKitch, HIGH);
+  }
+  if (kitchenAirValue <= 45) {
+    digitalWrite(releAirKitch, LOW);
+  }
+};
 
 void motionKitchen(int seconds) {
   if (digitalRead(lightSensKitchen) == HIGH) {
@@ -62,7 +72,7 @@ void motionKitchen(int seconds) {
 }
 
 void motionBar(int seconds) {
-   if (digitalRead(lightSensBar) == HIGH) {
+  if (digitalRead(lightSensBar) == HIGH) {
     digitalWrite(releLightBar, HIGH);
     MoveBarCount = 0;
   }
