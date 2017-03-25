@@ -1,11 +1,11 @@
 //# hoover
 
 int IN1 = 2; // Input1 подключен к выводу 2
-int IN2 = 3;
-int IN3 = 4;
+int IN2 = 4;
+int IN3 = 5;
 int IN4 = 7;
-int ENA = 6;
-int ENB = 5;
+int ENA = 3;
+int ENB = 6;
 int i;
 // задаем константы
 const int buttonPin = 8;     // номер входа, подключенный к кнопке
@@ -40,11 +40,9 @@ void loop()
   // проверяем нажата ли кнопка
   // если нажата, то buttonState будет HIGH:
   if (buttonState == HIGH) {
-    // включаем светодиод
     wall();
   }
   else {
-    // выключаем светодиод
     go();
   }
 
@@ -55,8 +53,8 @@ void go() {
   digitalWrite (IN2, HIGH);
   digitalWrite (IN3, LOW);
   digitalWrite (IN4, HIGH);
-  analogWrite(ENA, 90);
-  analogWrite(ENB, 90);
+  analogWrite(ENA, 80);
+  analogWrite(ENB, 80);
 }
 
 void wall() {
@@ -64,10 +62,10 @@ void wall() {
   digitalWrite (IN2,LOW);
   digitalWrite (IN3, HIGH);
   digitalWrite (IN4, LOW);
-  analogWrite(ENA, 100);
-  analogWrite(ENB, 100);
+  analogWrite(ENA, 85);
+  analogWrite(ENB, 90);
   delay(500);
   digitalWrite (IN3,LOW);
   digitalWrite (IN4, HIGH);
-  delay(500);
+  delay(1200);
 }
